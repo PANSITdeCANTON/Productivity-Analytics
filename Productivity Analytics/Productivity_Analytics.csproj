@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Productivity_Analytics</RootNamespace>
+    <UserSecretsId>ec36b948-4a56-4e9c-854e-28b54f2a1aea</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
