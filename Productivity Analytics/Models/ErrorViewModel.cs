@@ -6,4 +6,6 @@ namespace Productivity_Analytics.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
+
+
 }

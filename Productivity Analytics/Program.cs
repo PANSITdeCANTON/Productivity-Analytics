@@ -2,16 +2,32 @@ using Productivity_Analytics.Data;
 using Microsoft.EntityFrameworkCore;
 using Productivity_Analytics.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+})
+.AddCookie()
+.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+{
+     options.ClientId = builder.Configuration.GetSection("GoogleKeys:ClientId").Value;
+     options.ClientSecret = builder.Configuration.GetSection("GoogleKeys:ClientSecret").Value;
+    options.CallbackPath = "/signin-google";
+    options.AdditionalAuthorizationParameters["prompt"] = "select_account";
+});
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDb>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<Users, IdentityRole>(options =>
+builder.Services.AddIdentity<Users, AppRole>(options =>
 {
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
@@ -30,11 +46,11 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+ 
     app.UseHsts();
 }
 

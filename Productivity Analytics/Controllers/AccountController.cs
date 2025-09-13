@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Productivity_Analytics.Models;
 using Productivity_Analytics.ViewModels;
+using System.Security.Claims;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace UsersApp.Controllers
+//sql table name is AspNetUsers
+
+namespace Productivity_Analytics.Controllers
 {
     public class AccountController : Controller
     {
@@ -55,8 +58,9 @@ namespace UsersApp.Controllers
                 Users users = new Users
                 {
                     FullName = model.UserName,
+                    UserName = model.UserName,
                     Email = model.Email,
-                    UserName = model.Email,
+                    
                 };
 
                 var result = await userManager.CreateAsync(users, model.Password);
@@ -153,6 +157,60 @@ namespace UsersApp.Controllers
                 ModelState.AddModelError("", "Something went wrong. try again.");
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public IActionResult GoogleExternalLogin(string provider, string returnUrl = "/")
+        {
+            var redirectUrl = Url.Action("GoogleExternalLoginCallback", "Account", new { returnUrl });
+            var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+
+        public async Task<IActionResult> GoogleExternalLoginCallback(string returnUrl = "/")
+        {
+            var info = await signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+ 
+            var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
+            if (result.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
+            }
+
+            var email = info.Principal.FindFirstValue(System.Security.Claims.ClaimTypes.Email);
+            var name = info.Principal.FindFirstValue(System.Security.Claims.ClaimTypes.Name);
+
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                user = new Users
+                {
+                    UserName = name,
+                    Email = email,
+                    FullName = name
+                };
+
+                var createResult = await userManager.CreateAsync(user);
+
+                if (!createResult.Succeeded)
+                {
+                    foreach (var error in createResult.Errors)
+                        ModelState.AddModelError("", error.Description);
+
+                    return RedirectToAction("Login");
+                }
+            }
+
+            await userManager.AddLoginAsync(user, info);
+
+            await signInManager.SignInAsync(user, false);
+
+            return LocalRedirect(returnUrl);
         }
 
         public async Task<IActionResult> Logout()

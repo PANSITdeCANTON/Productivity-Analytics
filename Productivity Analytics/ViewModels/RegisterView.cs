@@ -3,6 +3,7 @@
 namespace Productivity_Analytics.ViewModels
 {
     public class RegisterView
+
     {
         [Required(ErrorMessage ="UserName is required.")]
         public required string UserName { get; set; }
@@ -21,5 +22,6 @@ namespace Productivity_Analytics.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public required string ConfirmPassword { get; set; }
+
     }
 }

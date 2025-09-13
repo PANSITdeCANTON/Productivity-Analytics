@@ -33,6 +33,14 @@
                 </label>
             </div>
             <input type="submit" value="Login" class="btn btn-success w-100 p-2" />
+            <div class="d-flex justify-content-center mb-3">
+                <a asp-controller="Account" asp-action="GoogleExternalLogin" asp-route-provider="Google">
+                    <img src="~/images/image7.png" alt="Login with Google" style="cursor:pointer;" />
+                </a>
+                <a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Facebook">
+                    <img src="/images/image8.png" alt="Login with Facebook" style="cursor:pointer;" />
+                </a>
+            </div>
             <p class="text-center mt-2">
                 Don't have an account? <a asp-controller="Account" asp-action="Register" class="text-decoration-none">Register</a>
             </p>
