@@ -18,5 +18,163 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+}
+
+button {
+    border-radius: 0;
+}
+
+button:focus:not(:focus-visible) {
+     outline: 0;
+}
+
+input,
+button,
+select
+{
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+[role=button] {
+    cursor: pointer;
+}
+header.masthead {
+    padding-top: 10.5rem;
+    padding-bottom: 6rem;
+    text-align: center;
+    color: #fff;
+    background-image: url('../images/image9.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-y;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+    header.masthead .masthead-subheading {
+        font-size: 1.5rem;
+        font-style: italic;
+        line-height: 1.5rem;
+        margin-bottom: 25px;
+        font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    header.masthead .masthead-heading {
+        font-size: 3.25rem;
+        font-weight: 700;
+        line-height: 3.25rem;
+        margin-bottom: 2rem;
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+.container
+{
+
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+     .container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+
+    @media (min-width: 768px) {
+        header.masthead {
+            padding-top: 15rem;
+            padding-bottom: 12.5rem;
+        }
+
+            header.masthead .masthead-subheading {
+                font-size: 2.25rem;
+                font-style: italic;
+                line-height: 2.25rem;
+                margin-bottom: 2rem;
+            }
+
+            header.masthead .masthead-heading {
+                font-size: 4.5rem;
+                font-weight: 700;
+                line-height: 4.5rem;
+                margin-bottom: 4rem;
+            }
+
+        .page-section {
+            padding: 6rem 0;
+        }
+
+            .page-section h2.section-heading, .page-section .section-heading.h2 {
+                font-size: 2.5rem;
+                margin-top: 0;
+                margin-bottom: 1rem;
+            }
+
+            .page-section h3.section-subheading, .page-section .section-subheading.h3 {
+                font-size: 1rem;
+                font-weight: 400;
+                font-style: italic;
+                font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                margin-bottom: 4rem;
+            }
+
+        @media (min-width: 768px) {
+            section {
+                padding: 9rem 0;
+            }
+        }
+
+        .btn-xl {
+            padding: 1.25rem 2.5rem;
+            font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .btn-social {
+            height: 2.5rem;
+            width: 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border-radius: 100%;
+        }
+    }
 }

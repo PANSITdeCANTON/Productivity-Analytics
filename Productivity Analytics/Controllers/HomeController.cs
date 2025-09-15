@@ -20,7 +20,7 @@ namespace Productivity_Analytics.Controllers
         }
 
         [Authorize]
-        public IActionResult Privacy()
+        public IActionResult LandingPage()
         {
             return View();
         }
